@@ -5,6 +5,7 @@
 
 // clang-format off
 #include "net.h"
+#include "netbase.h"
 #include "masternodeconfig.h"
 #include "util.h"
 #include "ui_interface.h"
@@ -60,15 +61,26 @@ bool CMasternodeConfig::read(std::string& strErr)
             }
         }
 
+        int port = 0;
+        std::string hostname = "";
+        SplitHostPort(ip, port, hostname);
+        if(port == 0 || hostname == "") {
+            strErr = _("Failed to parse host:port string") + "\n"+
+                    strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"";
+            streamConfig.close();
+            return false;
+        }
+        int mainnetDefaultPort = Params(CBaseChainParams::MAIN).GetDefaultPort();
+
         if (Params().NetworkID() == CBaseChainParams::MAIN) {
-            if (CService(ip).GetPort() != 33472) {
+            if (port != mainnetDefaultPort) {
                 strErr = _("Invalid port detected in masternode.conf") + "\n" +
                          strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
                          _("(must be 33472 for mainnet)");
                 streamConfig.close();
                 return false;
             }
-        } else if (CService(ip).GetPort() == 33472) {
+        } else if (port != mainnetDefaultPort) {
             strErr = _("Invalid port detected in masternode.conf") + "\n" +
                      strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
                      _("(33472 could be used only on mainnet)");

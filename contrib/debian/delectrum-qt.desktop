@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Delectrum
+Comment=Delectrum P2P Cryptocurrency
+Comment[fr]=Delectrum, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Delectrum, eşten eşe kriptografik sanal para birimi
+Exec=delectrum-qt %u
+Terminal=false
+Type=Application
+Icon=delectrum128
+MimeType=x-scheme-handler/delectrum;
+Categories=Office;Finance;

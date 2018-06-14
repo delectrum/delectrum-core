@@ -363,8 +363,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Pivx: 1 day
-        nTargetSpacing = 1 * 60;        // Pivx: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // Delectrum: 1 day
+        nTargetSpacing = 1 * 60;        // Delectrum: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1521998206;
         genesis.nBits = 0x1e0ffff0;
